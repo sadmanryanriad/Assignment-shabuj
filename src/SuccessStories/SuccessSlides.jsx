@@ -12,9 +12,27 @@ import "./styles.css";
 import { Pagination, Navigation } from "swiper/modules";
 import NavigationButtons from "./NavigationButtons";
 import SuccessCard from "./SuccessCard";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
 
 export default function SuccessSlides() {
-    const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.";
+  const [stories, setStories] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  const axiosSecure = useAxiosSecure();
+  const url = `/success-story-list`;
+  useEffect(() => {
+    axiosSecure.get(url).then((res) => {
+      console.log(res.data);
+      setStories(res.data);
+      setIsLoading(false);
+    });
+  }, [axiosSecure, url]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="relative">
       <Swiper
@@ -30,17 +48,15 @@ export default function SuccessSlides() {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <SuccessCard img="https://i.ibb.co/X2gnTVV/profile-1.jpg" name="naima islam" description={lorem}></SuccessCard>
-        </SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+        {stories.map((story) => (
+          <SwiperSlide key={story._id}>
+            <SuccessCard
+              img={story.img}
+              name={story.name}
+              description={story.description}
+            ></SuccessCard>
+          </SwiperSlide>
+        ))}
         <NavigationButtons></NavigationButtons>
       </Swiper>
     </div>
