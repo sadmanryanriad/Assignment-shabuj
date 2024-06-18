@@ -50,9 +50,16 @@ export default function AnimatedSlider() {
         className="MySwiper"
       >
         {events.map((event) => {
-          return (<SwiperSlide key={event?._id}>
-            <img src={event?.img} />
-          </SwiperSlide>)
+          return (
+            <SwiperSlide className="w-[70%] h-26rem" key={event?._id}>
+            <picture>
+              {/* Mobile image */}
+              <source media="(max-width: 768px)" srcSet={event?.imgMobile} />
+              {/* Desktop image */}
+              <img src={event?.imgDesktop} alt="Event" />
+            </picture>
+          </SwiperSlide>
+          )
         })}
       </Swiper>
     </>

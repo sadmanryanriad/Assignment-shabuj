@@ -23,8 +23,8 @@ body {
 .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 20rem;
-  height: 13rem;
+  /* width: 32rem;
+  height: 26rem; */
   border-radius: 8px;
 }
 
