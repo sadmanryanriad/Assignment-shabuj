@@ -46,14 +46,20 @@
   .swiper-slide {
     width: 371px;
     height: 33rem;
+    border-radius: 1rem;
   }
 
   .swiper-pagination-bullet-active {
-    background-color: blue;
+    background-color: white;
     width: 3rem;
     height: 1rem;
     border-radius: .5rem;
     align-self: center;
+  }
+
+  .swiper-pagination-bullet{
+    background-color: white;
+    color: white;
   }
 
   .swiper-pagination {
