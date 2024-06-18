@@ -1,11 +1,11 @@
-import UpcomingEvent from "./upcomingEvent/UpcomingEvent";
+// import UpcomingEvent from "./upcomingEvent/UpcomingEvent";
 
 import MarqueeSection from "./marquee/MarqueeSection";
 
 export default function App() {
   return (
     <>
-      <UpcomingEvent></UpcomingEvent>
+      {/* <UpcomingEvent></UpcomingEvent> */}
       <MarqueeSection></MarqueeSection>
     </>
   );
