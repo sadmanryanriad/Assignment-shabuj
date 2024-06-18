@@ -11,8 +11,10 @@ import "./styles.css";
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
 import NavigationButtons from "./NavigationButtons";
+import SuccessCard from "./SuccessCard";
 
 export default function SuccessSlides() {
+    const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.";
   return (
     <div className="relative">
       <Swiper
@@ -28,7 +30,9 @@ export default function SuccessSlides() {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide>
+          <SuccessCard img="https://i.ibb.co/X2gnTVV/profile-1.jpg" name="naima islam" description={lorem}></SuccessCard>
+        </SwiperSlide>
         <SwiperSlide>Slide 2</SwiperSlide>
         <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>
