@@ -1,5 +1,7 @@
 import UpcomingEvent from "./upcomingEvent/UpcomingEvent";
 
+import ConsultationForm from "./form/ConsultationForm";
+
 import Gallery from "./gallery/Gallery";
 
 import SuccessStories from "./SuccessStories/SuccessStories";
@@ -16,6 +18,8 @@ export default function App() {
       <SuccessStories></SuccessStories>
       <Gap></Gap>
       <Gallery></Gallery>
+      <Gap></Gap>
+      <ConsultationForm></ConsultationForm>
     </>
   );
 }
