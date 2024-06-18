@@ -51,7 +51,7 @@ export default function AnimatedSlider() {
       >
         {events.map((event) => {
           return (
-            <SwiperSlide className="w-[70%] h-26rem" key={event?._id}>
+            <SwiperSlide className="w-[70%] h-full rounded-2xl bg-transparent" key={event?._id}>
             <picture>
               {/* Mobile image */}
               <source media="(max-width: 768px)" srcSet={event?.imgMobile} />

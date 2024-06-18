@@ -23,7 +23,6 @@ export default function SuccessSlides() {
   const url = `/success-story-list`;
   useEffect(() => {
     axiosSecure.get(url).then((res) => {
-      console.log(res.data);
       setStories(res.data);
       setIsLoading(false);
     });
@@ -46,6 +45,7 @@ export default function SuccessSlides() {
           prevEl: ".swiper-button-prev",
         }}
         modules={[Pagination, Navigation]}
+        loop={true}
         className="mySwiper"
       >
         {stories.map((story) => (
