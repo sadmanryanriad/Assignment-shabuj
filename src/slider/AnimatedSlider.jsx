@@ -27,9 +27,14 @@ export default function AnimatedSlider() {
           slideShadows: true,
           scale:1
         }}
-        pagination={true}
+        pagination={{ el: '.swiper-pagination', clickable: true }}
+        navigation={{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+          clickable: true,
+        }}
         modules={[EffectCoverflow, Pagination]}
-        className="mySwiper"
+        className="MySwiper"
       >
         <SwiperSlide>
           <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
