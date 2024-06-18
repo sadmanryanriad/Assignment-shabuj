@@ -37,6 +37,13 @@ const events = [
         description: "Short description of the event, may be add date, location and other information."
     }
 ];
+
+// Repeat events array if necessary to meet the minimum requirement
+let repeatedEvents = events;
+while (repeatedEvents.length < 10) {
+    repeatedEvents = repeatedEvents.concat(events);
+}
+
 const Gallery = () => {
   return (
     <div className="w-full bg-[#0E32B7]">
@@ -44,10 +51,7 @@ const Gallery = () => {
         {/* gallery-1  */}
       <Marquee speed={60} pauseOnHover={true} direction="left">
         <div className="flex space-x-8 justify-around items-center mr-8">
-          {events.map((event) => {
-            return <GalleryCard key={event} img={event.img} name={event.name} description={event.description} />;
-          })}
-          {events.map((event) => {
+          {repeatedEvents.slice(0, 10).map((event) => {
             return <GalleryCard key={event} img={event.img} name={event.name} description={event.description} />;
           })}
         </div>
@@ -55,10 +59,7 @@ const Gallery = () => {
         {/* gallery-2  */}
       <Marquee speed={60} pauseOnHover={true} direction="right">
         <div className="flex space-x-8 justify-around items-center mr-8">
-          {events.map((event) => {
-            return <GalleryCard key={event} img={event.img} name={event.name} description={event.description} />;
-          })}
-          {events.map((event) => {
+          {repeatedEvents.slice(0, 10).map((event) => {
             return <GalleryCard key={event} img={event.img} name={event.name} description={event.description} />;
           })}
         </div>
