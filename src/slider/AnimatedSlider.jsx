@@ -13,7 +13,7 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 export default function AnimatedSlider() {
   return (
-    <>
+    <div className='border border-rose-500'>
       <Swiper
         effect={'coverflow'}
         grabCursor={true}
@@ -21,49 +21,34 @@ export default function AnimatedSlider() {
         slidesPerView={'auto'}
         coverflowEffect={{
           rotate: 0,
-          stretch: 0,
+          stretch: 70,
           depth: 100,
           modifier: 2.5,
           slideShadows: true,
           scale:1
         }}
-        pagination={{ el: '.swiper-pagination', clickable: true }}
-        navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-          clickable: true,
-        }}
+        // pagination={true}
+        initialSlide={2}
+        navigation
         modules={[EffectCoverflow, Pagination]}
         className="MySwiper"
       >
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+          <img src="https://i.ibb.co/mhZpyYV/r1.png" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+          <img src="https://i.ibb.co/MMhxW0D/r4.png" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+          <img src="https://i.ibb.co/Xj6LRK9/r2.png" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+          <img src="https://i.ibb.co/NKXD7Vv/r5.png" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+          <img src="https://i.ibb.co/vDh2rtY/r3.png" />
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 }
