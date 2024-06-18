@@ -1,31 +1,47 @@
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-
-import './slider.css';
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "./slider.css";
 
 // import required modules
-import { EffectCoverflow, Pagination } from 'swiper/modules';
+import { EffectCoverflow, Pagination } from "swiper/modules";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
 
 export default function AnimatedSlider() {
+  const axiosSecure = useAxiosSecure();
+  const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const url = `/upcoming-events`;
+
+  useEffect(() => {
+    axiosSecure.get(url).then((res) => {
+      setEvents(res?.data);
+      setIsLoading(false);
+    });
+  }, [axiosSecure, url]);
+
+  if(isLoading) return <div>Loading...</div>;
+
   return (
     <>
       <Swiper
-        effect={'coverflow'}
+        effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={'auto'}
+        slidesPerView={"auto"}
         coverflowEffect={{
           rotate: 0,
           stretch: 70,
           depth: 100,
           modifier: 2.5,
           slideShadows: true,
-          scale:1
+          scale: 1,
         }}
         // pagination={true}
         initialSlide={2}
@@ -33,21 +49,11 @@ export default function AnimatedSlider() {
         modules={[EffectCoverflow, Pagination]}
         className="MySwiper"
       >
-        <SwiperSlide>
-          <img src="https://i.ibb.co/mhZpyYV/r1.png" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.ibb.co/MMhxW0D/r4.png" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.ibb.co/Xj6LRK9/r2.png" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.ibb.co/NKXD7Vv/r5.png" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.ibb.co/vDh2rtY/r3.png" />
-        </SwiperSlide>
+        {events.map((event) => {
+          return (<SwiperSlide key={event?._id}>
+            <img src={event?.img} />
+          </SwiperSlide>)
+        })}
       </Swiper>
     </>
   );
