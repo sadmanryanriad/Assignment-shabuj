@@ -1,10 +1,9 @@
-import AnimatedSlider from "./slider/AnimatedSlider";
-import Container from "./components/Container";
+import UpcomingEvent from "./upcomingEvent/UpcomingEvent";
 
 export default function App() {
   return (
     <>
-    <Container><AnimatedSlider></AnimatedSlider></Container>
+      <UpcomingEvent></UpcomingEvent>
     </>
-  )
+  );
 }

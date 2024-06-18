@@ -13,7 +13,7 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 export default function AnimatedSlider() {
   return (
-    <div className='border border-rose-500'>
+    <>
       <Swiper
         effect={'coverflow'}
         grabCursor={true}
@@ -29,7 +29,7 @@ export default function AnimatedSlider() {
         }}
         // pagination={true}
         initialSlide={2}
-        navigation
+        loop={true}
         modules={[EffectCoverflow, Pagination]}
         className="MySwiper"
       >
@@ -49,6 +49,6 @@ export default function AnimatedSlider() {
           <img src="https://i.ibb.co/vDh2rtY/r3.png" />
         </SwiperSlide>
       </Swiper>
-    </div>
+    </>
   );
 }
