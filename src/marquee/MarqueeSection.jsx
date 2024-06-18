@@ -19,8 +19,8 @@ const MarqueeSection = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="bg-[#4BA1FF] h-36 border flex items-center rounded-tl-3xl rounded-br-3xl">
-      <div className="p-2 text-5xl font-semibold bg-[#FFFFFF] transform -rotate-2 w-full">
+    <div className="bg-[#4BA1FF] h-24 md:h-36 border flex items-center rounded-tl-3xl rounded-br-3xl">
+      <div className="p-2 text-2xl md:text-5xl font-semibold bg-[#FFFFFF] transform -rotate-2 w-full">
         <Marquee>
           {
             marqueeList.map(marq=>{

@@ -3,7 +3,7 @@ const MarqueeComponent = ({ children }) => {
   return (
     <div className="flex justify-center items-center gap-4 overflow-hidden">
       {children}{" "}
-      <span className="text-3xl mr-4">
+      <span className="text-xl md:text-3xl mr-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="35"
