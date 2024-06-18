@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +21,7 @@ const ConsultationForm = () => {
     });
   };
 
+  const axiosSecure = useAxiosSecure();
   const handleSubmit = (e) => {
     e.preventDefault();
     const {
@@ -46,7 +48,12 @@ const ConsultationForm = () => {
       return;
     }
     // Handle form submission
-    console.log("Form submitted:", formData);
+    // console.log("Form submitted:", formData);
+    axiosSecure.post('consultation-forms', formData).then(res=>{
+      // console.log(res.data);
+      if(res?.data?.acknowledged) alert("Your form has been submitted successfully.");
+    })
+      .catch(err=>console.log(err));
   };
 
   return (
