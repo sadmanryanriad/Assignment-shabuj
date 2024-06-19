@@ -10,7 +10,7 @@ const UpcomingEvents = () => {
   const [events, setEvents] = useState([]);
   const [isLoadingEvents, setIsLoadingEvents] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
-  const imgBBAPIKey = "17e8bae7e29a64c3e5d5ec8f854a5c34";
+  const imgBBAPIKey = import.meta.env.VITE_BB_API_KEY;
 
   const {
     imageUrl: desktopImageUrl,

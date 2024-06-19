@@ -2,13 +2,19 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { FaTrashAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
+import useImgBBUploader from "../hooks/useImgBBUploader";
 
 const SuccessStories = () => {
   const axiosSecure = useAxiosSecure();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [newStory, setNewStory] = useState({ img: "", name: "", description: "" });
-  const url = 'success-story-list';
+  const [newStory, setNewStory] = useState({
+    img: "",
+    name: "",
+    description: "",
+  });
+  const [isUploading, setIsUploading] = useState(false); // Added state to manage uploading status
+  const url = "success-story-list";
 
   const reFetch = () => {
     setIsLoading(true);
@@ -56,23 +62,41 @@ const SuccessStories = () => {
       });
   };
 
+  const api = import.meta.env.VITE_BB_API_KEY;
+  const { uploadImage, imageUrl } = useImgBBUploader(api);
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setIsUploading(true); // Set uploading state to true
+      await uploadImage(file);
+      setNewStory((prevStory) => ({ ...prevStory, img: imageUrl })); // Set the image URL after upload completes
+      setIsUploading(false); // Set uploading state to false
+    }
+  };
+
+  useEffect(() => {
+    if (imageUrl) {
+      setNewStory((prevStory) => ({ ...prevStory, img: imageUrl }));
+    }
+  }, [imageUrl]);
+
   if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className="p-4">
       <h1 className="text-4xl text-center font-bold mb-4">Success Stories</h1>
-      
+
       <form onSubmit={handleAddStory} className="mb-6">
-        <h2 className="text-2xl mb-4">Add New Story</h2>
+        <h2 className="text-2xl mb-4">
+          {isUploading ? (
+            <span className="loading loading-spinner text-primary"></span>
+          ) : (
+            "Add New Story"
+          )}
+        </h2>
         <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Image URL"
-            value={newStory.img}
-            onChange={(e) => setNewStory({ ...newStory, img: e.target.value })}
-            className="border px-4 py-2 rounded w-full"
-            required
-          />
+          <input type="file" accept="image/*" onChange={handleImageUpload} />
         </div>
         <div className="mb-4">
           <input
@@ -88,12 +112,21 @@ const SuccessStories = () => {
           <textarea
             placeholder="Description"
             value={newStory.description}
-            onChange={(e) => setNewStory({ ...newStory, description: e.target.value })}
+            onChange={(e) =>
+              setNewStory({ ...newStory, description: e.target.value })
+            }
             className="border px-4 py-2 rounded w-full"
             required
           />
         </div>
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        <button
+          type="submit"
+          className={`bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600 ${
+            (isUploading || !newStory.img) && // Disable button if image is uploading or not yet set
+            "opacity-50 cursor-not-allowed"
+          }`}
+          disabled={isUploading || !newStory.img}
+        >
           Add Story
         </button>
       </form>
@@ -118,12 +151,21 @@ const SuccessStories = () => {
           </thead>
           <tbody>
             {data.map((story) => (
-              <tr key={story._id} className="bg-white border-b border-gray-300 rounded-xl">
+              <tr
+                key={story._id}
+                className="bg-white border-b border-gray-300 rounded-xl"
+              >
                 <td className="px-6 py-4 whitespace-no-wrap">
-                  <img src={story.img} alt={story.name} className="w-32 h-20 object-cover rounded-xl" />
+                  <img
+                    src={story.img}
+                    alt={story.name}
+                    className="w-32 h-20 object-cover rounded-xl"
+                  />
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap">{story.name}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{story.description.slice(0,100)}...</td>
+                <td className="px-6 py-4 whitespace-no-wrap">
+                  {story.description.slice(0, 100)}{story?.description.length > 100 && "..."}
+                </td>
                 <td className="px-6 py-4 whitespace-no-wrap">
                   <button
                     onClick={() => handleDelete(story._id)}

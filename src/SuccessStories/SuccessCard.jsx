@@ -19,7 +19,7 @@ const SuccessCard = ({ img, name, description }) => {
       </div>
       <div>
         <p className="text-base">
-          {description}
+          {description.slice(0, 200)}{description.length > 200 && "..."}
         </p>
       </div>
     </div>
