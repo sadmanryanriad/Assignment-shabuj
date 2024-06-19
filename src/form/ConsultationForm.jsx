@@ -58,7 +58,7 @@ const ConsultationForm = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center md:min-h-[700px] bg-gray-100">
+    <div className="flex flex-col md:flex-row justify-center items-center md:min-h-[700px] bg-gray-100 overflow-hidden">
       <form
         className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg"
         onSubmit={handleSubmit}
