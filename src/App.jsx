@@ -11,17 +11,16 @@ import CoreStrength from "./coreStrength/CoreStrength";
 
 export default function App() {
   return (
-    <>
+    <div className="bg-white">
       {/* <UpcomingEvent></UpcomingEvent> */}
       <Gap></Gap>
+      <CoreStrength></CoreStrength>
       <MarqueeSection></MarqueeSection>
       <Gap></Gap>
       <SuccessStories></SuccessStories>
       <Gap></Gap>
       <Gallery></Gallery>
-      <Gap></Gap>
       <ConsultationForm></ConsultationForm>
-      <CoreStrength></CoreStrength>
-    </>
+    </div>
   );
 }
