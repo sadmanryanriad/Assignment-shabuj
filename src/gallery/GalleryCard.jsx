@@ -5,7 +5,7 @@ const GalleryCard = ({ img, name, description }) => {
             <img className="h-full w-full object-cover bg-cover bg-center rounded-xl filter grayscale" src={img} alt="gallery image" />
             <div className="absolute bottom-0 left-0 w-full p-2 rounded-b-lg bg-gradient-to-r from-green-400 to-blue-500 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <h3 className="text-lg font-bold mb-2">{name}</h3>
-                <p className="text-sm">{description}</p>
+                <p className="text-sm">{description.slice(0, 100)}{description.length > 100 && "..."}</p>
             </div>
         </div>
     );
