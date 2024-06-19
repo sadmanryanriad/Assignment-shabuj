@@ -107,7 +107,7 @@ const UpcomingEvents = () => {
     <div className="p-4">
       <h1 className="text-4xl text-center font-bold mb-4">Upcoming Events</h1>
       <div className="mb-4 text-right">
-        <div className="flex space-x-4">
+        <div className="flex flex-col md:flex-row md:justify-left items-center space-y-2 md:space-x-4 border w-fit p-2 bg-green-400 rounded-xl">
           <input
             type="file"
             accept="image/*"
