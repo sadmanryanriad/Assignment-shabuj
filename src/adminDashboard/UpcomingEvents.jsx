@@ -2,26 +2,23 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { FaTrashAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
-import useImgBBUploader from "../hooks/useImgBBUploader"; 
+import useImgBBUploader from "../hooks/useImgBBUploader";
 
 const UpcomingEvents = () => {
   const axiosSecure = useAxiosSecure();
   const url = `upcoming-events`;
   const [events, setEvents] = useState([]);
   const [isLoadingEvents, setIsLoadingEvents] = useState(true);
-  const imgBBAPIKey = "17e8bae7e29a64c3e5d5ec8f854a5c34"; 
+  const imgBBAPIKey = "17e8bae7e29a64c3e5d5ec8f854a5c34";
 
   const {
-    idLoading: isUploadingDesktop,
     imageUrl: desktopImageUrl,
     uploadImage: uploadDesktopImage,
-    error: desktopImageError,
   } = useImgBBUploader(imgBBAPIKey);
+
   const {
-    isLoading: isUploadingMobile,
     imageUrl: mobileImageUrl,
     uploadImage: uploadMobileImage,
-    error: mobileImageError,
   } = useImgBBUploader(imgBBAPIKey);
 
   const reFetch = () => {
@@ -61,13 +58,13 @@ const UpcomingEvents = () => {
   };
 
   const handleAddEvent = async () => {
-    // Ensure both images are uploaded before proceeding
     if (!desktopImageUrl || !mobileImageUrl) {
       toast.error("Please upload both desktop and mobile images.");
       return;
     }
-    // Adding event with uploaded image URLs
+
     try {
+      setIsLoadingEvents(true); // Set isLoadingEvents to true during image upload
       const newEvent = {
         imgDesktop: desktopImageUrl,
         imgMobile: mobileImageUrl,
@@ -75,15 +72,16 @@ const UpcomingEvents = () => {
       await axiosSecure.post(url, newEvent);
       reFetch();
       toast.success("Event added successfully");
-      uploadDesktopImage(null);
-      uploadMobileImage(null);
     } catch (err) {
       toast.error("Error adding event");
       console.error(err);
+    } finally {
+      setIsLoadingEvents(false); // Set isLoadingEvents to false after image upload completes
+      uploadDesktopImage(null); // Clear desktop image URL
+      uploadMobileImage(null); // Clear mobile image URL
     }
   };
 
-  // Function to handle desktop image upload
   const handleDesktopImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -91,7 +89,6 @@ const UpcomingEvents = () => {
     }
   };
 
-  // Function to handle mobile image upload
   const handleMobileImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
