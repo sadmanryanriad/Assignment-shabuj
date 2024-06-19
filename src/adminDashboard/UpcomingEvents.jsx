@@ -1,16 +1,29 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { FaTrashAlt } from 'react-icons/fa'; // Import the delete icon
+import toast from "react-hot-toast";
 
 const UpcomingEvents = () => {
   const axiosSecure = useAxiosSecure();
   const url = `upcoming-events`;
   const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const reFetch = ()=>{
+    axiosSecure.get(url)
+    .then(res => {
+      setEvents(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
 
   useEffect(() => {
     axiosSecure.get(url)
       .then(res => {
         setEvents(res.data);
+        setIsLoading(false);
       })
       .catch(err => {
         console.log(err);
@@ -20,9 +33,12 @@ const UpcomingEvents = () => {
   const handleDelete = (id) => {
     axiosSecure.delete(`${url}/${id}`)
       .then(() => {
-        setEvents(events.filter(event => event._id !== id));
+        reFetch();
+        toast.success("Event deleted successfully");
+        // setEvents(events.filter(event => event._id !== id));
       })
       .catch(err => {
+        toast.error("Error deleting event");
         console.log(err);
       });
   };
@@ -31,6 +47,8 @@ const UpcomingEvents = () => {
     // Logic to add an event (e.g., open a modal to fill out event details)
     console.log("Add Event button clicked");
   };
+
+  if(isLoading) return <div>Loading...</div>;
 
   return (
     <div className="p-4">
