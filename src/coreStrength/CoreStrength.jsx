@@ -9,18 +9,18 @@ import vector6 from '../assets/vector6.png';
 const CoreStrength = () => {
   return (
 <div className='min-h-[100vh]'>
-<div className="bg-[#EBEBEB] max-w-6xl mx-auto rounded-[64px] lg:mt-36 mt-7 lg:mb-36 mb-7 relative lg:z-20">
-      <div className="section-bg-overlay"></div>
+<div className="bg-gradient-to-b from-[#007BFF] to-[#00274D] max-w-6xl mx-auto rounded-[64px] lg:mt-36 mt-7 lg:mb-36 mb-7 relative lg:z-20">
+      <div className="w-full h-full absolute bg-gradient-to-b from-transparent to-black rounded-[64px] opacity-70"></div>
       <div className="flex flex-col lg:block">
         <div className="lg:absolute lg:-top-24 lg:-z-40 order-2">
           <img src={strengthImage} alt="strength" />
         </div>
-        <h2 className="text-7xl py-32 text-right pr-16 order-1">
+        <h2 className="text-7xl py-32 text-right pr-16 text-[#3FE9DE] opacity-95 order-1">
           Our Core Strength
         </h2>
       </div>
       <div>
-        <div className="flex justify-around flex-wrap gap-10 pb-12 pl-5 pr-5 bg-black rounded-b-[64px] opacity-45">
+        <div className="flex justify-around flex-wrap gap-10 pb-12 pl-5 pr-5 rounded-b-[64px] backdrop-blur-sm opacity-95">
           <div className="text-center">
             <img className="mx-auto" src={vector1} alt="icon" />
             <h2 className="text-5xl text-white">
@@ -42,21 +42,21 @@ const CoreStrength = () => {
             </h2>
             <p className=" text-white">Courses Offered</p>
           </div>
-          <div className="text-center">
+          <div className="text-center flex flex-col">
             <img className="mx-auto" src={vector4} alt="icon" />
             <h2 className="text-5xl text-white">
               <span>350</span>+
             </h2>
             <p className=" text-white">Global Counsellors</p>
           </div>
-          <div className="text-center">
+          <div className="text-center flex flex-col gap-1">
             <img className="mx-auto" src={vector5} alt="icon" />
             <h2 className="text-5xl text-white">
               <span>150</span>+
             </h2>
             <p className=" text-white">Recruiting University</p>
           </div>
-          <div className="text-center">
+          <div className="text-center flex flex-col gap-2">
             <img className="mx-auto" src={vector6} alt="icon" />
             <h2 className="text-5xl text-white">
               <span>5,000</span>+
