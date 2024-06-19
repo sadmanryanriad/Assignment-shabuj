@@ -26,7 +26,7 @@ const AdminDashboard = () => {
           onClick={closeSidebar}
         ></div>
       )}
-      <div className="flex-grow p-6 mt-16 md:mt-0">
+      <div className="flex-grow p-0 md:p-2 mt-16 md:mt-4 overflow-auto">
         <Outlet />
       </div>
     </div>
