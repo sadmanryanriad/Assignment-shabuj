@@ -1,13 +1,8 @@
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "./slider.css";
-
-// import required modules
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
@@ -26,10 +21,20 @@ export default function AnimatedSlider() {
     });
   }, [axiosSecure, url]);
 
-  if(isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>;
+
+  const handleSlideChange = (swiper) => {
+    swiper.slides.forEach((slide) => {
+      slide.style.width = "600px"; // Adjusted width for non-active slides
+      slide.style.height = "400px"; // Adjusted height for non-active slides
+    });
+    const activeSlide = swiper.slides[swiper.activeIndex];
+    activeSlide.style.width = "900px"; // Increase the width for active slide
+    activeSlide.style.height = "500px"; // Decrease the height for active slide
+  };
 
   return (
-    <>
+    <div className="overflow-x-hidden w-full max-w-[400px] md:max-w-7xl">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -40,18 +45,21 @@ export default function AnimatedSlider() {
           stretch: 70,
           depth: 100,
           modifier: 2.5,
-          slideShadows: true,
+          slideShadows: false,
           scale: 1,
         }}
-        // pagination={true}
         initialSlide={2}
         loop={true}
         modules={[EffectCoverflow, Pagination]}
+        onSlideChange={handleSlideChange}
+        onSwiper={handleSlideChange}
         className="MySwiper"
       >
-        {events.map((event) => {
-          return (
-            <SwiperSlide className="w-[70%] h-full rounded-2xl bg-transparent" key={event?._id}>
+        {events.map((event) => (
+          <SwiperSlide
+            className="rounded-2xl bg-transparent"
+            key={event?._id}
+          >
             <picture>
               {/* Mobile image */}
               <source media="(max-width: 768px)" srcSet={event?.imgMobile} />
@@ -59,9 +67,8 @@ export default function AnimatedSlider() {
               <img src={event?.imgDesktop} alt="Event" />
             </picture>
           </SwiperSlide>
-          )
-        })}
+        ))}
       </Swiper>
-    </>
+    </div>
   );
 }

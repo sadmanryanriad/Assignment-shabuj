@@ -1,4 +1,4 @@
-// import UpcomingEvent from "./upcomingEvent/UpcomingEvent";
+import UpcomingEvent from "./upcomingEvent/UpcomingEvent";
 
 import ConsultationForm from "./form/ConsultationForm";
 
@@ -12,7 +12,7 @@ import CoreStrength from "./coreStrength/CoreStrength";
 export default function App() {
   return (
     <div className="bg-white">
-      {/* <UpcomingEvent></UpcomingEvent> */}
+      <UpcomingEvent></UpcomingEvent>
       <Gap></Gap>
       <CoreStrength></CoreStrength>
       <MarqueeSection></MarqueeSection>
