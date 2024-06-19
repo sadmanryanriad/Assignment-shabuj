@@ -10,7 +10,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>
     },
     {
-        path: "admin-dashboard",
+        path: "admin",
         element: <AdminDashboard></AdminDashboard>,
         errorElement: <ErrorPage></ErrorPage>
     }
