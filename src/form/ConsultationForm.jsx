@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import RotatingText from "../rotatingText/RotatingText";
 
 const ConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -57,7 +58,7 @@ const ConsultationForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex flex-col md:flex-row justify-center items-center md:min-h-[700px] bg-gray-100">
       <form
         className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg"
         onSubmit={handleSubmit}
@@ -191,6 +192,7 @@ const ConsultationForm = () => {
           Book Free Counselling
         </button>
       </form>
+      <div className="self-end"><RotatingText></RotatingText></div>
     </div>
   );
 };

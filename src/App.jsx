@@ -7,7 +7,6 @@ import Gallery from "./gallery/Gallery";
 import SuccessStories from "./SuccessStories/SuccessStories";
 import MarqueeSection from "./marquee/MarqueeSection";
 import Gap from "./components/Gap";
-import RotatingText from "./rotatingText/RotatingText";
 
 export default function App() {
   return (
@@ -21,7 +20,6 @@ export default function App() {
       <Gallery></Gallery>
       <Gap></Gap>
       <ConsultationForm></ConsultationForm>
-      <RotatingText></RotatingText>
     </>
   );
 }
