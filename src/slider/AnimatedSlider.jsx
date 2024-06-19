@@ -1,9 +1,12 @@
+import left from "../assets/left.png";
+import right from "../assets/right.png";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "./slider.css";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 
@@ -34,41 +37,65 @@ export default function AnimatedSlider() {
   };
 
   return (
-    <div className="overflow-x-hidden w-full max-w-[400px] md:max-w-7xl">
-      <Swiper
-        effect={"coverflow"}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={"auto"}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 70,
-          depth: 100,
-          modifier: 2.5,
-          slideShadows: false,
-          scale: 1,
-        }}
-        initialSlide={2}
-        loop={true}
-        modules={[EffectCoverflow, Pagination]}
-        onSlideChange={handleSlideChange}
-        onSwiper={handleSlideChange}
-        className="MySwiper"
-      >
-        {events.map((event) => (
-          <SwiperSlide
-            className="rounded-2xl bg-transparent"
-            key={event?._id}
-          >
-            <picture>
-              {/* Mobile image */}
-              <source media="(max-width: 768px)" srcSet={event?.imgMobile} />
-              {/* Desktop image */}
-              <img src={event?.imgDesktop} alt="Event" />
-            </picture>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className="h-full md:w-[1350px] flex flex-col md:flex-row items-center justify-center">
+      <div>
+        <button className="swiper-button-prev hidden md:block w-14 border-2 border-white rounded-full p-2">
+          <img src={left} alt="left arrow" />
+        </button>
+      </div>
+      <div className="overflow-x-hidden m-auto w-full max-w-[400px] md:max-w-7xl flex-1">
+        <Swiper
+          effect={"coverflow"}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={"auto"}
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 70,
+            depth: 100,
+            modifier: 2.5,
+            slideShadows: false,
+            scale: 1,
+          }}
+          initialSlide={2}
+          loop={true}
+          navigation={{
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          }}
+          modules={[EffectCoverflow, Pagination, Navigation]}
+          onSlideChange={handleSlideChange}
+          onSwiper={handleSlideChange}
+          className="MySwiper"
+        >
+          {events.map((event) => (
+            <SwiperSlide
+              className="rounded-2xl bg-transparent"
+              key={event?._id}
+            >
+              <picture>
+                {/* Mobile image */}
+                <source media="(max-width: 768px)" srcSet={event?.imgMobile} />
+                {/* Desktop image */}
+                <img src={event?.imgDesktop} alt="Event" />
+              </picture>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      <div>
+        <button className="swiper-button-next hidden md:block w-14 border-2 border-white rounded-full p-2">
+          <img src={right} alt="right arrow" />
+        </button>
+      </div>
+      <div className="flex gap-3 md:hidden">
+        <button className="swiper-button-prev w-14 border-2 border-white rounded-full p-2">
+          <img src={left} alt="left arrow" />
+        </button>
+        <button className="swiper-button-next w-14 border-2 border-white rounded-full p-2">
+          <img src={right} alt="right arrow" />
+        </button>
+      </div>
     </div>
   );
 }
