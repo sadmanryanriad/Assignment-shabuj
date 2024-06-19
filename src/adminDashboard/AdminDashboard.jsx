@@ -10,10 +10,22 @@ const AdminDashboard = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
+  const closeSidebar = () => {
+    if (isSidebarOpen) {
+      setSidebarOpen(false);
+    }
+  };
+
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden relative">
       <Navbar toggleSidebar={toggleSidebar} />
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black opacity-50 md:hidden"
+          onClick={closeSidebar}
+        ></div>
+      )}
       <div className="flex-grow p-6 mt-16 md:mt-0">
         <Outlet />
       </div>
