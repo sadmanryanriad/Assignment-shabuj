@@ -9,6 +9,7 @@ const UpcomingEvents = () => {
   const url = `upcoming-events`;
   const [events, setEvents] = useState([]);
   const [isLoadingEvents, setIsLoadingEvents] = useState(true);
+  const [isUploading, setIsUploading] = useState(false);
   const imgBBAPIKey = "17e8bae7e29a64c3e5d5ec8f854a5c34";
 
   const {
@@ -85,15 +86,19 @@ const UpcomingEvents = () => {
   const handleDesktopImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
+      setIsUploading(true);
       await uploadDesktopImage(file);
     }
+    setIsUploading(false);
   };
 
   const handleMobileImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
+      setIsUploading(true);
       await uploadMobileImage(file);
     }
+    setIsUploading(false);
   };
 
   if (isLoadingEvents) return <div>Loading...</div>;
@@ -121,7 +126,7 @@ const UpcomingEvents = () => {
             }`}
             disabled={!desktopImageUrl || !mobileImageUrl}
           >
-            Add Event
+            {isUploading? <span className="loading loading-spinner text-primary"></span> : "Add Event"}
           </button>
         </div>
       </div>
