@@ -7,6 +7,7 @@ import SuccessStories from "../adminDashboard/SuccessStories";
 import MarqueeSection from "../adminDashboard/MarqueeSection";
 import ImageGallery from "../adminDashboard/ImageGallery";
 import ConsultationForm from "../adminDashboard/ConsultationForm";
+import CoreStrength from "../adminDashboard/CoreStrength";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
       { path: "success-stories", element: <SuccessStories /> },
       { path: "marquee-section", element: <MarqueeSection /> },
       { path: "image-gallery", element: <ImageGallery /> },
-      { path: "consultation-form", element: <ConsultationForm /> }
+      { path: "consultation-form", element: <ConsultationForm /> },
+      { path: "core-strength", element: <CoreStrength /> },
     ]
   }
 ]);

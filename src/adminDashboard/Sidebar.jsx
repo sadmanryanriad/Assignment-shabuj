@@ -47,6 +47,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             📝 Consultation Form
           </NavLink>
           <hr />
+          <NavLink
+            to="core-strength"
+            className="my-2 p-2 rounded-lg text-base md:text-xl font-bold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300 hover:bg-blue-400"
+            onClick={toggleSidebar}
+          >
+            💪 Core Strength
+          </NavLink>
+          <hr />
         </nav>
       </div>
     </div>
