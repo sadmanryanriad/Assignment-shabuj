@@ -6,8 +6,32 @@ import vector3 from "../assets/vector3.png";
 import vector4 from "../assets/vector4.png";
 import vector5 from "../assets/vector5.png";
 import vector6 from "../assets/vector6.png";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const CoreStrength = () => {
+  const axiosSecure = useAxiosSecure();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(()=>{
+    setLoading(true);
+    axiosSecure
+     .get("core-strength")
+     .then((res) => {
+        const fetchedData = res.data[0];
+        // console.log(fetchedData);
+        setData(fetchedData);
+        setLoading(false);
+      })
+     .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  },[axiosSecure])
+
+  if(loading) return <p>Loading...</p>;
+
   return (
     <div className="my-10">
       <div className="bg-gradient-to-b from-[#007BFF] to-[#00274D] max-w-6xl mx-auto rounded-[64px] lg:mt-36 mt-7 lg:mb-36 mb-7 relative lg:z-20">
@@ -26,7 +50,7 @@ const CoreStrength = () => {
               <img className="mx-auto" src={vector1} alt="icon" />
               <h2 className="text-5xl text-white">
                 <span>
-                  <CountUp delay={0} duration={4} end={16} />
+                  <CountUp delay={0} duration={4} end={data?.globalOffice} />
                 </span>
               </h2>
               <p className=" text-white">Global Offices</p>
@@ -35,7 +59,7 @@ const CoreStrength = () => {
               <img className="mx-auto" src={vector2} alt="icon" />
               <h2 className="text-5xl text-white">
                 <span>
-                  <CountUp delay={0} duration={5} end={100} />
+                  <CountUp delay={0} duration={5} end={data?.uKEducationFaire} />
                 </span>
                 +
               </h2>
@@ -45,7 +69,7 @@ const CoreStrength = () => {
               <img className="mx-auto" src={vector3} alt="icon" />
               <h2 className="text-5xl text-white">
                 <span>
-                  <CountUp delay={0} duration={5} end={50000} />
+                  <CountUp delay={0} duration={5} end={data?.coursesOffered} />
                 </span>
                 +
               </h2>
@@ -55,7 +79,7 @@ const CoreStrength = () => {
               <img className="mx-auto" src={vector4} alt="icon" />
               <h2 className="text-5xl text-white">
                 <span>
-                  <CountUp delay={0} duration={4} end={350} />
+                  <CountUp delay={0} duration={4} end={data?.globalCounsellors} />
                 </span>
                 +
               </h2>
@@ -65,7 +89,7 @@ const CoreStrength = () => {
               <img className="mx-auto" src={vector5} alt="icon" />
               <h2 className="text-5xl text-white">
                 <span>
-                  <CountUp delay={0} duration={3} end={150} />
+                  <CountUp delay={0} duration={3} end={data?.recruitingUniversity} />
                 </span>
                 +
               </h2>
@@ -75,7 +99,7 @@ const CoreStrength = () => {
               <img className="mx-auto" src={vector6} alt="icon" />
               <h2 className="text-5xl text-white">
                 <span>
-                  <CountUp delay={0} duration={5} end={5000} />
+                  <CountUp delay={0} duration={5} end={data?.studentServed} />
                 </span>
                 +
               </h2>
