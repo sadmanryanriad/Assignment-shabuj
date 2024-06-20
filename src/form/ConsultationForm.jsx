@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import RotatingText from "../rotatingText/RotatingText";
+import toast from "react-hot-toast";
 
 const ConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -50,11 +51,17 @@ const ConsultationForm = () => {
     }
     // Handle form submission
     // console.log("Form submitted:", formData);
-    axiosSecure.post('consultation-forms', formData).then(res=>{
-      // console.log(res.data);
-      if(res?.data?.acknowledged) alert("Your form has been submitted successfully.");
-    })
-      .catch(err=>console.log(err));
+    axiosSecure
+      .post("consultation-forms", formData)
+      .then((res) => {
+        // console.log(res.data);
+        if (res?.data?.acknowledged)
+          toast.success("Your form has been submitted successfully.");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something went wrong. Please try again later.");
+      });
   };
 
   return (
@@ -192,7 +199,9 @@ const ConsultationForm = () => {
           Book Free Counselling
         </button>
       </form>
-      <div className="self-end"><RotatingText></RotatingText></div>
+      <div className="self-end">
+        <RotatingText></RotatingText>
+      </div>
     </div>
   );
 };
