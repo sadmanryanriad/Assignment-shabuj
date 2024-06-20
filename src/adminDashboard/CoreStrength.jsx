@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { BiEdit, BiSave } from "react-icons/bi";
 
 const CoreStrength = () => {
   const axiosSecure = useAxiosSecure();
@@ -43,7 +44,6 @@ const CoreStrength = () => {
 
   const handleSave = () => {
     // console.log(formData);
-
     axiosSecure
       .patch(`${url}/${data._id}`, formData)
       .then(() => {
@@ -65,7 +65,7 @@ const CoreStrength = () => {
     <div className="p-4">
       <h1 className="text-4xl text-center font-bold mb-4">Core Strength</h1>
 
-      <div className="overflow-x-auto rounded-xl shadow-lg">
+      <div className="overflow-x-auto rounded-xl shadow-lg max-w-[90%] m-auto">
         <table className="min-w-full bg-white border border-gray-300 rounded-xl overflow-hidden">
           <thead>
             <tr>
@@ -88,13 +88,13 @@ const CoreStrength = () => {
                 Student Served
               </th>
               <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 uppercase tracking-wider">
-                Edit
+                Edit Number
               </th>
             </tr>
           </thead>
           <tbody>
             <tr className="bg-white border-b border-gray-300 rounded-xl">
-              <td className="px-6 py-4 whitespace-no-wrap">
+              <td className="px-6 py-4 text-lg">
                 {isEditing ? (
                   <input
                     type="number"
@@ -107,7 +107,7 @@ const CoreStrength = () => {
                   data?.globalOffice
                 )}
               </td>
-              <td className="px-6 py-4 whitespace-no-wrap">
+              <td className="px-6 py-4 text-lg">
                 {isEditing ? (
                   <input
                     type="number"
@@ -120,7 +120,7 @@ const CoreStrength = () => {
                   data?.uKEducationFaire
                 )}
               </td>
-              <td className="px-6 py-4 whitespace-no-wrap">
+              <td className="px-6 py-4 text-lg">
                 {isEditing ? (
                   <input
                     type="number"
@@ -133,7 +133,7 @@ const CoreStrength = () => {
                   data?.coursesOffered
                 )}
               </td>
-              <td className="px-6 py-4 whitespace-no-wrap">
+              <td className="px-6 py-4 text-lg">
                 {isEditing ? (
                   <input
                     type="number"
@@ -146,7 +146,7 @@ const CoreStrength = () => {
                   data?.globalCounsellors
                 )}
               </td>
-              <td className="px-6 py-4 whitespace-no-wrap">
+              <td className="px-6 py-4 text-lg">
                 {isEditing ? (
                   <input
                     type="number"
@@ -159,7 +159,7 @@ const CoreStrength = () => {
                   data?.recruitingUniversity
                 )}
               </td>
-              <td className="px-6 py-4 whitespace-no-wrap">
+              <td className="px-6 py-4 text-lg">
                 {isEditing ? (
                   <input
                     type="number"
@@ -172,20 +172,20 @@ const CoreStrength = () => {
                   data?.studentServed
                 )}
               </td>
-              <td className="px-6 py-4 whitespace-no-wrap">
+              <td className="px-6 py-4 text-lg">
                 {isEditing ? (
                   <button
                     onClick={handleSave}
-                    className="text-green-600 hover:text-green-800"
+                    className="text-green-600 hover:text-green-800 text-lg"
                   >
-                    Save
+                    <span className="flex justify-center items-center gap-2">Save <BiSave></BiSave></span>
                   </button>
                 ) : (
                   <button
                     onClick={() => setIsEditing(true)}
-                    className="text-blue-600 hover:text-blue-800"
+                    className="text-blue-600 hover:text-blue-800 text-lg"
                   >
-                    Edit
+                    <span className="flex justify-center items-center gap-2">Edit <BiEdit></BiEdit></span>
                   </button>
                 )}
               </td>
